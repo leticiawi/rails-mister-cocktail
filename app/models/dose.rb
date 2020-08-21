@@ -5,4 +5,3 @@ class Dose < ApplicationRecord
   validates :cocktail, uniqueness: { scope: :ingredient }
 
 end
-
