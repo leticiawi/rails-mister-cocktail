@@ -1,53 +1,38 @@
 <div class="container">
-  <h1><%= @cocktail.name %></h1>
-   <%= link_to 'Back to all cocktails', cocktails_path %>
-    <div class="row">
-      <div class="col-sm-12 col-md-6">
-        <p><strong>Recipe</strong></p>
-          <table class="table table-bordered">
-          <tbody>
 
-          </tbody>
+  <h1><%= @cocktail.name %></h1>
+  <%= link_to "Back to all cocktails", cocktails_path %>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <h3>Recipe</h3>
+      <table class="table table-bordered">
+        <tbody>
           <thead>
-            <tr>
-              <th>Ingredient</th>
-              <th>Description</th>
-              <th>Action</th>
-            </tr>
+            <th>Ingredient</th>
+            <th>Description</th>
+            <th>Action</th>
           </thead>
+          <% @cocktail.doses.each do |dose| %>
+            <tr>
+              <td><%= dose.ingredient.name %></td>
+              <td><%= dose.description %></td>
+              <td>
+                <%= link_to dose_path(dose), method: :delete, data: { confirm: "Are you sure?" } do %>
+                  <i class="fa fa-trash destroy_dose"></i>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
       </table>
     </div>
-    <div class="class col-sm-12 col-md-6">
-      <h3>Add a new dose</h3>
-      <form novalidate="novalidate" class="simple_form new_dose" id="new_dose" action="/cocktails/6/doses" accept-charset="UTF-8" method="post">
-        <input name="utf8" type="hidden" value="✓">
-        <input type="hidden" name="authenticity_token" value="JPfo/MRHaLiBKzql+4AlhWtHSVj8AMqDup8J56FSpOaMQoo6psu4Gqyqz333LR69XCOkxxTWFUmNbN6UwPUSeA==">
-        <div class="form-group select required dose_ingredient">
-          <label class="control-label select required" for="dose_ingredient_id">
-            <abbr title="required">*</abbr>
-             Ingredient
-           </label>
-           <select class="form-control select required beautiful-dropdown select2-hidden-accessible" name="dose[ingredient_id]" id="dose_ingredient_id" data-select2-id="dose_ingredient_id" tabindex="-1" aria-hidden="true">
-            <option value="" data-select2-id="2"></option>
-           </select>
-           <span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="1" style="width: 330px;">
-            <span class="selection">
-                <span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-dose_ingredient_id-container">
-                  <span class="select2-selection__rendered" id="select2-dose_ingredient_id-container" role="textbox" aria-readonly="true" title="">
-                  </span>
-                  <span class="select2-selection__arrow" role="presentation">
-                    <b role="presentation"></b>
-                  </span>
-                </span>
-              </span>
-              <span class="dropdown-wrapper" aria-hidden="true"></span>
-            </span>
-          </div>
-        <div class="form-group string optional dose_description">
-          <label class="control-label string optional" for="dose_description">Description</label>
-          <input class="form-control string optional" type="text" name="dose[description]" id="dose_description">
-        </div>
-          <input type="submit" name="commit" value="Create Dose" class="btn btn-default btn btn-primary" data-disable-with="Create Dose">
-          </form>
-        </div>
-     </div>
+    <div class="col-sm-12 col-md-6">
+      <%= render "doses/new", cocktail: @cocktail, dose: @dose %>
+    </div>
+  </div>
+
+
+
+
+

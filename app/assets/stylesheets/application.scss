@@ -2,6 +2,7 @@
 @import "config/fonts";
 @import "config/colors";
 @import "config/bootstrap_variables";
+@import "bootstrap/scss/bootstrap";
 
 // External libraries
 @import "bootstrap/scss/bootstrap";
@@ -11,3 +12,38 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+@import "cocktails";
+@import "doses";
+@import "ingredients";
+
+body {
+  font-family: "Courier New", "Helvetica", "sans-serif";
+  font-size: 16px;
+  line-height: 1.4;
+  color: black ;
+  background-color: white;
+}
+
+.content {
+  display: flex;
+}
+
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 16px;
+  flex-grow: 1;
+}
+
+.card-description h1{
+
+    font-family: "Courier New", "sans-serif";
+    font-weight: 500;
+    line-height: 1.1;
+
+}
+
+
+
